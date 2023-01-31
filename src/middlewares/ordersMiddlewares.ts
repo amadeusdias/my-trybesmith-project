@@ -8,7 +8,6 @@ const idsValidation = async (req: Request, res: Response, next: NextFunction) =>
   if (!Array.isArray(productsIds)) {
     return res.status(422).json({ message: '"productsIds" must be an array' });
   }
-  // const validateNumber = productsIds.every((id) => typeof id === 'number');
   if (productsIds.length === 0) {
     return res.status(422).json({ message: '"productsIds" must include only numbers' });
   }
