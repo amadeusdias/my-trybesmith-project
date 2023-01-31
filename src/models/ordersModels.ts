@@ -1,3 +1,4 @@
+import { ResultSetHeader } from 'mysql2';
 import connection from './connection';
 import { IOrders } from '../interfaces/orders.interface';
 
@@ -9,6 +10,20 @@ const getAllOrders = async (): Promise<IOrders[]> => {
   return result as IOrders[];
 };
 
+const addOrder = async (order: IOrders) => {
+  const queryInsert = 'INSERT INTO Trybesmith.orders (user_id) VALUES (?)';
+  const queryUpdate = `UPDATE Trybesmith.products 
+  SET order_id = ?
+  WHERE id = ?`;
+  const { productsIds, userId } = order;
+  const [result] = await connection.execute<ResultSetHeader>(queryInsert, [userId]);
+  const { insertId: orderId } = result;
+  Promise.all(productsIds.map((p) => 
+    connection.execute<ResultSetHeader>(queryUpdate, [orderId, p])));
+  return { userId, productsIds };
+};
+
 export = {
   getAllOrders,
+  addOrder,
 };
