@@ -11,6 +11,13 @@ const addUser = async (user: IUsers) => {
   return insertId;
 };
 
+const getAllUsers = async (): Promise<IUsers[]> => {
+  const q = 'SELECT * FROM Trybesmith.users';
+  const [result] = await connection.execute(q);
+  return result as IUsers[];
+};
+
 export = {
   addUser,
+  getAllUsers,
 };
