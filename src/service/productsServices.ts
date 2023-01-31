@@ -7,6 +7,12 @@ const addProductService = async (product: IProducts): Promise<IProducts> => {
   return newProduct;
 };
 
+const getAllProductsService = async (): Promise<IProducts[]> => {
+  const products = await productsModels.getAllProducts();
+  return products;
+};
+
 export = {
   addProductService,
+  getAllProductsService,
 };

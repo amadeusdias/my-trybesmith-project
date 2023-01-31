@@ -3,6 +3,7 @@ import productsControllers from '../controller/productsControllers';
 
 const router = Router();
 
-router.post('/', productsControllers.addProduct);
+router.post('/', productsControllers.addProductController);
+router.get('/', productsControllers.getAllProductsController);
 
 export default router;
