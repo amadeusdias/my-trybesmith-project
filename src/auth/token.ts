@@ -9,7 +9,7 @@ const secret = process.env.JWT_SECRET || 'secret';
 const createToken = (user: IUsers): string => {
   // const { id, username, vocation, level, password } = user;
   // const payload = { id, username, vocation, level, password };
-  const token = jwt.sign({ payload: user }, secret, {
+  const token = jwt.sign({ user }, secret, {
     expiresIn: '7d',
     algorithm: 'HS256',
   });
